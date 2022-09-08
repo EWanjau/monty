@@ -47,3 +47,47 @@ lyomu@ubuntu:~/monty$
 	* an error occured
 - If the program can't malloc anymore, the error message *Error: malloc failed* is printed, followed by a new line, and exit with status *EXIT_FAILURE*.
 - Only *malloc* and *free* are used to manage heap memory.
+
+## OPCODES AND FUNCTIONS
+
+| OPCODE  | FUNCTION				  | Usage |
+| :-----  | :------------------------------------ | :---  |
+| *push*  | Pushes an element to the stack.	  | push <int> |
+| *pall*  | Prints all the values on the stack starting from the top of the stack | pall |
+| *pint*  | Prints the value at the top of the stack, followed by a new line. | pint |
+| *pop*   | Removes the top element of the stack. | pop |
+| *swap*  | Swaps the top two elements of the stack. | swap |
+| *add*   | Adds the top two elements of the stack.<ul><li>The result is stored in the second element.</li><li>The list is one element short.</li></ul> | add |
+| *nop*   | Does nothing | nop |
+| *sub*   | Subtracts the top element of the stack from the second top element of the stack.<ul><li>The result is stored in the second element.</li><li>The list is one element short.</li></ul>| sub |
+| *div*     | Divides the second top element of the stack by the top element of the stack. .<ul><li>The result is stored in the second element.</li><li>The list is one element short.</li></ul> | div |
+| *mul*     | Multiplies the second top element of the stack with the top element of the stack.<ul><li>The result is stored in the second element.</li><li>The list is one element short.</li></ul> | mul |
+| *mod* | Computes the rest of the division of the second top element of the stack by the top element of the stack.<ul><li>The result is stored in the second element.</li><li>The list is one element short.</li></ul> | mod |
+| *pchar* | Prints the char at the top of the stack. <ul><li>Integer is treated as the ascii value of the character to be printed.</li></ul> | pchar |
+| *pstr*  | Prints the string starting at the top of the stack. <ul><li>Integer is treated as the ascii value of the character to be printed.</li></ul> The string stops when either <ul><li>The stack is over.</li><li>The value of the element is 0.</li><li>The value of the element is not on the asci table.</li></ul> <p>If the stack is empty, a new line is printed.</p> | pstr |
+| *rotl*  | Rotates the stack to the top. <ul><li>The top element of the stack becomes the last one.</li><li>The second top element of the stack becomes the first one.</li></ul> rotl never fails.  | rotl |
+| *rotr*  | Rotates the stack to the bottom. <ul><li>The last element of the stack becomes the top element of the stack</li></ul> rotr never fails. | rotr |
+
+## OPCODE ERRORS AND EXIT CODES
+
+| OPCODE  | ERROR		| CAUSE OF ERROR	| EXIT CODE  |
+| :---    | :---		| :---			| :---	     |
+| push    | L<line_number>: usage: push integer | Argument passed is not an integer or was not passed | EXIT_FAILURE |
+| pall    | nothing is printed | empty stack | none |
+| pint    | L<line_number>: can't pint, stack empty | empty  stack | EXIT_FAILURE |
+| pop     | L<line_number>: can't pop an empty stack | empty stack | EXIT_FAILURE |
+| swap    | L<line_number>: can't swap, stack too short | stack has less than 2 elements | EXIT_FAILURE |
+| add     | L<line_number>: can't add, stack too short | stack has less than 2 elements | EXIT_FAILURE |
+| sub     | L<line_number>: can't sub, stack too short | stack has less than 2 elements | EXIT_FAILURE |
+| div     | L<line_number>: can't div, stack too short | stack has less than 2 elements | EXIT_FAILURE |
+|         | L<line_number>: division by zero | top element of the stack is *0* | EXIT_FAILURE |
+| mul     | L<line_number>: can't mul, stack too short | stack hass less than 2 elements | EXIT_FAILURE |
+| mod     | L<line_number>: can't mod, stack too short | stack hass less than 2 elements | EXIT_FAILURE |
+|         | L<line_number>: division by zero | top element of the stack is 0 | EXIT_FAILURE |
+| pchar   | L<line_number>: can't pchar, value out of range. | the integer value is not in the ascii table. | EXIT_FAILURE |
+|         | L<line_number>: can't pchar, stack empty. | stack is empty | EXIT_FAILURE |
+
+## AUTHOR
+
+[lyomu](gmnyomu@gmail.com)
+[EWanjau]()
